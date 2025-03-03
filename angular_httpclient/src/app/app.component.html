@@ -1,0 +1,25 @@
+<h1>Angular httpClient</h1>
+
+<div>
+  <div class="form-control">
+    <input type="text" placeholder="Title" [(ngModel)]="todoTitle">
+  </div>
+  <button class="btn" (click)="addTodo()">Add</button>
+  <button class="btn" (click)="fetchTodos()">Download</button>
+</div>
+
+<hr>
+<div *ngIf="!loading; else loadingBlock">
+  <div class="card" *ngFor="let respItem of todosArray">
+    <p>
+      <span [class.completed]="respItem.completed">{{respItem.title}}</span>
+      <span>
+        <button class="btn">Delete</button>
+        <button class="btn" [disabled]="respItem.completed">Complete</button>
+      </span>
+    </p>
+  </div>
+</div>
+<ng-template #loadingBlock>
+  <p>Loading</p>
+</ng-template>
