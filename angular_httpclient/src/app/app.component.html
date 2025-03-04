@@ -14,8 +14,8 @@
     <p>
       <span [class.completed]="respItem.completed">{{respItem.title}}</span>
       <span>
-        <button class="btn">Delete</button>
-        <button class="btn" [disabled]="respItem.completed">Complete</button>
+        <button class="btn" (click)="removeTodo(respItem.id)">Delete</button>
+        <button class="btn" [disabled]="respItem.completed" (click)="completeTodo(respItem.id)">Complete</button>
       </span>
     </p>
   </div>

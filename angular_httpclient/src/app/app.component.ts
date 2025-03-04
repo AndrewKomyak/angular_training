@@ -1,24 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Todo } from './interfaces/todo.interface';
-import { delay } from 'rxjs';
+import { HttpClientService } from './services/httpclient.service';
 
 @Component({
   selector: 'app-root',
   imports: [FormsModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  providers: [HttpClientService]
 })
 export class AppComponent implements OnInit {
+  url = 'https://jsonplaceholder.typicode.com/todos'
   todosArray: Todo[] = [];
 
   todoTitle = '';
 
   loading= false;
 
-  constructor(protected httpClient: HttpClient) {
+  constructor(private httpClientService: HttpClientService<Todo>) {
   }
 
   ngOnInit() {
@@ -36,8 +37,9 @@ export class AppComponent implements OnInit {
       title: this.todoTitle
     }
 
-    this.httpClient.post<Todo>('https://jsonplaceholder.typicode.com/todos', newTodo)
+    this.httpClientService.post<Todo>(this.url, newTodo)
       .subscribe(response => {
+        console.log(response);
         this.todosArray.unshift(response)
       })
 
@@ -46,11 +48,38 @@ export class AppComponent implements OnInit {
 
   fetchTodos() {
     this.loading = true;
-    this.httpClient.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-    .pipe(delay(1000))
+    this.httpClientService.getList<Todo>(this.url)
     .subscribe(response => {
-      this.todosArray = response as Todo[];
+      this.todosArray = response;
       this.loading = false;
     })
+  }
+
+  removeTodo(id?: number) {
+    if (id === undefined) {
+      return;
+    }
+
+    this.httpClientService.delete<Todo>(`${this.url}/${id}`)
+    .subscribe(response => {
+      console.log(response);
+    })
+
+    this.todosArray = this.todosArray.filter(item =>item.id != id);
+  }
+
+  completeTodo(id?: number) {
+    if (id === undefined) {
+      return;
+    }
+
+    const complteditem = this.todosArray.find(item => item.id == id);
+    if (complteditem === undefined || complteditem === null) {
+      return;
+    }
+
+    this.httpClientService.put(`${this.url}/${id}`, JSON.stringify(complteditem))
+    .subscribe(response => complteditem.completed = true);
+
   }
 }
