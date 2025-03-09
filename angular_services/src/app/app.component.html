@@ -1,0 +1,20 @@
+<h1>Angular services</h1>
+
+<div>
+  <h2>App Counter: {{counterService.counter}}</h2>
+
+  <button (click)="counterService.increase()">Increase</button>
+  <button (click)="counterService.decrease()">Decrease</button>
+  <hr>
+  <hr>
+  <hr>
+
+  <h2>Local Counter: {{localCounterService.counter}}</h2>
+
+  <button (click)="localCounterService.increase()">Increase</button>
+  <button (click)="localCounterService.decrease()">Decrease</button>
+  <hr>
+  <hr>
+  <hr>
+  <app-counter></app-counter>
+</div>

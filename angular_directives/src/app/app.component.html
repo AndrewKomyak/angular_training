@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Angular Directives</h1>
+
+  <p appStyle="red" [dStyles]="{border: '1px solid blue', fontWeight: '300', borderRadius: '5px'}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore adipisci ratione libero illum non qui, debitis pariatur quae, iure corrupti odit quaerat deleniti magni eveniet ea neque laborum inventore quisquam.</p>
+  <p appStyle="blue" [dStyles]="{border: '3px solid red', fontWeight: '500', borderRadius: '10px'}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officiis. Ut, doloremque soluta veritatis accusamus ab modi iusto! Odit earum amet sint nisi? Magnam voluptatem aliquid sapiente illum sequi placeat?</p>
+
+  <hr>
+  <button class="btn" (click)="isVisible = !isVisible">Visibility Toggle</button>
+  <div class="wrap" *appIfnot="!isVisible">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti laboriosam mollitia fugiat esse libero labore odit reiciendis repellat non vitae sequi consequatur expedita adipisci perferendis dolores, rerum rem dolor! Ut!</p>
+  </div>
+</div>

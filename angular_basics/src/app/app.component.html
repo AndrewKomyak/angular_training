@@ -1,0 +1,114 @@
+<h1>Hello, {{ title }}</h1>
+<p><strong>{{number - 2}}</strong></p>
+<br>
+<br>
+<hr>
+
+
+
+<app-post></app-post>
+<app-post></app-post>
+<app-post2></app-post2>
+<app-post3></app-post3>
+<app-post4></app-post4>
+<br>
+<br>
+<hr>
+
+
+
+<input 
+  type="text" 
+  (keydown.enter)="onInput($event)"
+  (blur)="onBlur(myInput.value)"
+  #myInput
+  >
+<p><strong>{{inputValue}}</strong></p>
+<hr>
+<input type="text" [(ngModel)]="inputValue">
+<hr>
+<button (click)="backgroundToggle = !backgroundToggle">Background Toggle</button>
+<div [ngStyle]="{
+  width: '200px',
+  height: '200px',
+  borderRadious: '5px',
+  border: '1px solid red',
+  background: backgroundToggle ? 'green' : 'blue'
+}">
+
+</div>
+
+<br>
+<br>
+<hr>
+
+
+
+<p [ngClass]="{
+  red: backgroundToggle,
+  blue: !backgroundToggle
+}">This is test text for ngClass</p>
+
+<p 
+[class.blue]="backgroundToggle"
+[class.red]="!backgroundToggle">This is test text for class.binding</p>
+<br>
+<br>
+<hr>
+
+
+
+<button (click)="toggle = !toggle">Toggle</button>
+<p *ngIf="toggle; else blueP" class="red">ngif else red P</p>
+<ng-template #blueP>
+  <p class="blue">ngif else blue P</p>
+</ng-template>
+<br>
+<br>
+<hr>
+
+
+
+<button (click)="switchToggle = !switchToggle">Switch toggle</button>
+<button (click)="switchToggle = 111">Check default</button>
+<div [ngSwitch]="switchToggle">
+  <p *ngSwitchCase="true" class="red">ngSwitch for red</p>
+  <p *ngSwitchCase="false" class="blue">ngSwitch for blue</p>
+  <p *ngSwitchDefault>ngSwitch default</p>
+</div>
+<br>
+<br>
+<hr>
+
+
+
+<ul>
+  <li *ngFor="let n of arr; let i = index">
+    {{i+1}} - <strong>{{n}}</strong>
+  </li>
+</ul>
+<br>
+
+<ul>
+  <li *ngFor="let post of objArr">
+    <p>{{post.title}} - <b>{{post.author}}</b></p>
+    <ul>
+      <li *ngFor="let comm of post.comments">
+        <p><b>{{comm.name}}</b>: {{comm.text}}</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+<br>
+<br>
+<hr>
+
+<p>pipe for date example</p>
+<p>{{ now | date:"long" | uppercase }}</p>
+<br>
+<br>
+<hr>
+<img [src]="img">
+<br>
+<br>
+<hr>

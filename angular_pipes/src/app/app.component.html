@@ -1,0 +1,52 @@
+<div>
+  <h1>Angular Pipes</h1>
+  <p>{{e | number:'3.1-3' }}</p>
+  <p>{{e | number:'1.1-1' }}</p>
+  <hr>
+
+
+  <p>{{str | uppercase}}</p>
+  <p>{{str | uppercase | lowercase}}</p>
+  <p>{{str | titlecase}}</p>
+  <p>{{str | titlecase | slice:1}}</p>
+  <p>{{str | titlecase | slice:1:5}}</p>
+  <p>{{str | titlecase | slice:1:-2}}</p>
+  <hr>
+
+  <p>{{date | date}}</p>
+  <p>{{date | date:'fullDate'}}</p>
+  <p>{{date | date:'longDate'}}</p>
+  <p>{{date | date:'yyyy'}}</p>
+  <p>{{date | date:'yyyy-MMMM-dd'}}</p>
+  <hr>
+
+  <p>{{floatValue}}</p>
+  <p>{{floatValue | currency}}</p>
+  <p>{{floatValue | percent}}</p>
+  <hr>
+
+  <p>{{obj | json}}</p>
+  <hr>
+
+  <p>{{10 | multby:2}}</p>
+  <p>{{10 | multby:3}}</p>
+  <p>{{10 | multby:5}}</p>
+  <hr>
+
+  <p>{{'Hello World       ' | exMarks}}</p>
+<hr>
+<hr>
+<hr>
+  <input type='text' [(ngModel)]='search'>
+  <div *ngFor="let post of posts | filter:search">
+    <h2>{{post.title}}</h2>
+      <p>{{post.text}}</p>
+  </div>
+
+  <hr>
+  <hr>
+  <Hr>
+
+  <p>{{p | async}}</p>
+  <p>{{currentDate | async}}</p>
+</div>
